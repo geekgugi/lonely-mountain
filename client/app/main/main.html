@@ -1,29 +1,30 @@
 <div ng-include="'components/navbar/navbar.html'"></div>
 
-<header class="hero-unit" id="banner">
-  <div class="container">
-    <img src="assets/images/text_symbol_white.svg" alt="dwellshare - helping to find shared houses">
-    <p class="lead">Search. Meet. Move in</p>
-  </div>
-</header>
-
-<div class="container">
+<div class="full-container">
+  <div class="map">
     <ui-gmap-google-map center='map.center' zoom='map.zoom'></ui-gmap-google-map>
-    
-  <form class="thing-form">
-    <p class="input-group row">
-      <input type="text" class="form-control" ng-mouseout="hideMap()" ng-mouseover="showMap()" placeholder="Add a new thing here." ng-model="newThing">
-      <span class="input-group-btn">
-        <button type="submit" class="btn btn-primary" ng-click="showMap()">Search</button>
-      </span>
-    </p>
-  </form>
+  </div>
+  <div class="form">
+    <div class="jumbotron">
+      <div class="row search-holder">
+        <div class="col-md-3 pull-right">
+          <div class="input-group">
+            <input type="text" class="form-control" ng-autocomplete ng-model='autocomplete' details="details"/>
+            <span class="input-group-btn">
+              <button class="btn btn-default" type="button" ng-click="search()">
+                <i class="glyphicon glyphicon-search"></i>
+              </button>
+            </span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>
-
 <footer class="footer">
   <div class="container">
-      <p>Dwellshare Inc|
-        <a href="https://twitter.com/dwellshare">@dwellshare</a> |
-         <a href="https://github.com/geekgugi/lonely-mountain/issues?state=open">Issues</a></p>
+    <p>Dwellshare Inc|
+    <a href="https://twitter.com/dwellshare">@dwellshare</a> |
+    <a href="https://github.com/geekgugi/lonely-mountain/issues?state=open">Issues</a></p>
   </div>
 </footer>

@@ -7,7 +7,8 @@ angular.module('lmApp', [
   'ngRoute',
   'btford.socket-io',
   'ui.bootstrap',
-  'uiGmapgoogle-maps'
+  'uiGmapgoogle-maps',
+  'ngAutocomplete'
 ])
   .config(function ($routeProvider, $locationProvider, $httpProvider, uiGmapGoogleMapApiProvider) {
     uiGmapGoogleMapApiProvider.configure({

@@ -37,3 +37,8 @@
     color: #000;
     padding: 0.2em 0;
 }
+
+.navbar-brand img {
+  width: 196px;
+  margin-top: -13px;
+}
