@@ -1,5 +1,7 @@
 [![Build Status](https://travis-ci.org/geekgugi/lonely-mountain.svg?branch=master)](https://travis-ci.org/geekgugi/lonely-mountain)
 
+[![Build Status](https://semaphoreapp.com/api/v1/projects/af9a0031-d6c9-4d01-aa87-2449fb67ed61/299564/badge.png)](https://semaphoreapp.com/geekgugi/lonely-mountain)      
+
 
 lonely-mountain
 ===============
