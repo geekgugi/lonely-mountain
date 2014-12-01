@@ -2,7 +2,7 @@
 
 angular.module('lmApp')
 .controller('MainCtrl', function ($scope, $http, socket, uiGmapGoogleMapApi) {
-
+  $scope.map = {};
 
   $scope.loadCurrentLocation = function() {
     uiGmapGoogleMapApi.then(function() {
@@ -23,12 +23,12 @@ angular.module('lmApp')
   };
 
   $scope.search = function() {
-    var map = {};
-    map.coords = {};
-    map.coords.latitude = $scope.details.geometry.location.lat();
-    map.coords.longitude = $scope.details.geometry.location.lng();
-    map.zoom = 14;
-    changeMap(map);
+    
+    $scope.map.coords = {};
+    $scope.map.coords.latitude = $scope.details.geometry.location.lat();
+    $scope.map.coords.longitude = $scope.details.geometry.location.lng();
+    $scope.map.zoom = 14;
+    changeMap($scope.map);
   };
   $scope.loadCurrentLocation();
 });

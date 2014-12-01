@@ -1,13 +1,16 @@
 'use strict';
 
 var mongoose = require('mongoose'),
-    Schema = mongoose.Schema;
+Schema = mongoose.Schema;
 
 var RoomSchema = new Schema({
   ownerId: String,
   houseId: String,
   area: String,
-  geolocation:{ type: String, coordinates: [ Number,Number]},
+  geolocation: {
+    type: { type: String },
+    coordinates: []
+  },
   address: String,
   availability: Boolean,
   startingDate: Date,
@@ -24,14 +27,14 @@ var RoomSchema = new Schema({
   parkingSpace: String,
   rooms: [
     {
-      rent: Number,
-      floorArea: String,
-      deposit: Number,
-      airConditioned: String,
-      bathRoom: String,
-      hotwater: String,
-      tv: String
-    }
+    rent: Number,
+    floorArea: String,
+    deposit: Number,
+    airConditioned: String,
+    bathRoom: String,
+    hotwater: String,
+    tv: String
+  }
   ],
   sharedSpace: [
     String,
@@ -41,5 +44,8 @@ var RoomSchema = new Schema({
   active: Boolean
 });
 
+// define index
+RoomSchema.index({ geolocation: '2dsphere'});
+
 module.exports = mongoose.model('Room', RoomSchema);
- 
+
