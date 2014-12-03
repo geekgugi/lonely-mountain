@@ -34,6 +34,13 @@
 .footer a {
   color: #1970c8
 }
+input.search{
+  z-index: 0;
+position: absolute;
+right: 103px;
+top: 4px;
+width: 294px;
+}
 /** Custom **/
 
 .map {
