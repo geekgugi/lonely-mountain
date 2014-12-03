@@ -12,8 +12,9 @@ angular.module('lmApp', [
 ])
   .config(function ($routeProvider, $locationProvider, $httpProvider, uiGmapGoogleMapApiProvider) {
     uiGmapGoogleMapApiProvider.configure({
-        v: '3.17',
-        libraries: 'weather,geometry,visualization'
+      key:'AIzaSyCT7hEAbw7JWU-Krir6cOCngFDrrhZg-Eo',
+      v: '3.17',
+      libraries: 'places,geometry'
     });
     $routeProvider
       .otherwise({
