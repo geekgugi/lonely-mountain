@@ -41,17 +41,38 @@ describe('Room Model', function() {
     });
   });
 
+  it('should fail when latitude/longitude/range is not passed', function(done) {
+    request(app)
+    .get('/api/rooms/11,11')
+    .expect(500)
+    .end(function(err, res) {
+      if (err) return done(err);
+      done();
+    });
 
+  });
+
+  it('should respond with JSON array of length 0', function(done) {
+    request(app)
+    .get('/api/rooms/0,0,0')
+    .expect(200)
+    .expect('Content-Type', /json/)
+    .end(function(err, res) {
+      if (err) return done(err);
+      res.body.should.have.length(0);
+      done();
+    });
+  });
 
   it('should respond with JSON array', function(done) {
     request(app)
-      .get('/api/rooms')
-      .expect(200)
-      .expect('Content-Type', /json/)
-      .end(function(err, res) {
-        if (err) return done(err);
-        res.body.should.be.instanceof(Array);
-        done();
-      });
+    .get('/api/rooms')
+    .expect(200)
+    .expect('Content-Type', /json/)
+    .end(function(err, res) {
+      if (err) return done(err);
+      res.body.should.be.instanceof(Array);
+      done();
+    });
   });
 });

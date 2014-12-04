@@ -11,6 +11,41 @@ exports.index = function(req, res) {
   });
 };
 
+// Get list of places given a coordinate within the given range
+exports.getPlaces =  function(req, res) {
+  var places = [];
+  var latitude = req.params.latitude;
+  var longitude = req.params.longitude;
+  var range = req.params.range;
+
+  if ( typeof latitude === 'undefined' || typeof longitude === 'undefined' ||
+      typeof range === 'undefined' ) {
+    return handleError(res, "Insufficient parameters");
+  }
+  
+  Room.find({
+    geolocation: {
+      $nearSphere: [ longitude, latitude ],
+      $maxDistance: range
+    }
+  }, function(error, rooms) {
+    if (error) {
+      return handleError(res, error);
+    }
+    for (var i = 0; i < rooms.length; i++) {
+      var place = {
+        latitude: rooms[i].geolocation.coordinates[0],
+        longitude: rooms[i].geolocation.coordinates[1],
+        id: rooms[i].houseId,
+        title: rooms[i].area
+      }
+      places.push(place);
+    }
+    return res.json(200, places);
+  });
+}
+
+
 // Get a single room
 exports.show = function(req, res) {
   Room.findById(req.params.id, function (err, room) {
