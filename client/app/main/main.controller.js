@@ -79,7 +79,7 @@ angular.module('lmApp')
 
   $scope.searchbox = {
     //template to load for the search box !mandatory field
-    template: '../components/search/search.html',
+    template: 'app/search/search.html',
     //position of search bar
     position: 'top-right',
     // Only one event associated with search box
