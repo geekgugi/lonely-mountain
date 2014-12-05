@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('lmApp')
-.controller('MainCtrl', function($scope, $http, uiGmapGoogleMapApi) {
+.controller('MainCtrl', function($scope, $http, uiGmapGoogleMapApi, $log) {
   // map variable will help to load map
   $scope.marks = [];
   $scope.map = {
@@ -33,28 +33,23 @@ angular.module('lmApp')
       zoom: 14
     };
   };
-  // Can be removed
-  $scope.dummyMarks = [];
-  var mark1 = {
-    latitude: 12.95,
-    longitude: 77.77,
-    title: 'm' + 1
-  }
-  mark1['id'] = 1;
-  $scope.dummyMarks.push(mark1);
-  // removed from here
-
 
   $scope.findPlaces = function() {
-    var selectedLatitude = $scope.details.geometry.location.lat();
-    var selectedLongitude = $scope.details.geometry.location.lng();
+    var selectedLatitude = $scope.map.center.latitude;
+    var selectedLongitude = $scope.map.center.longitude;
     //  TODO: Maximum distance has to be computed from the UI
     //  i) By making use of boundries
     //  ii) By making use of circle
-    var maximumDistance = "12"
-    // make request with the these selected values
-    // to get all the places available within fixed range
-
+    var maximumDistance = "100";
+    var url = '/api/rooms/' + selectedLongitude + ',' + 
+      selectedLatitude + ',' + maximumDistance; 
+    // have a promise from $http
+    var promise = $http.get(url);
+    promise.then(function (response) {
+      $scope.marks = response.data;
+    }, function(error) {
+      $log.error("places api returned error");
+    });
   };
 
   var changePlaceCB =  function (searchBox) {
@@ -65,17 +60,8 @@ angular.module('lmApp')
     //change map to selected location
     $scope.map.center.latitude = places[0].geometry.location.lat();
     $scope.map.center.longitude = places[0].geometry.location.lng();
-    //temp: remove all other markers and show one in the selected location
-    $scope.dummyMarks = []
-    $scope.dummyMarks.push({
-      latitude: places[0].geometry.location.lat(),
-      longitude: places[0].geometry.location.lng(),
-      title: places[0].name,
-      id: 'MAP_CENTER'
-
-    });
+    $scope.findPlaces();
   }
-
 
   $scope.searchbox = {
     //template to load for the search box !mandatory field
@@ -88,7 +74,8 @@ angular.module('lmApp')
       // format event: callback
       places_changed: changePlaceCB
     }
-
   };
-  //  $scope.loadCurrentLocation();
+  // Initially show a location where user sessioned
+  // from
+  $scope.loadCurrentLocation();
 });
