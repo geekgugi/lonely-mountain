@@ -4,21 +4,20 @@ angular.module('lmApp')
 .controller('MainCtrl', function($scope, $http, uiGmapGoogleMapApi, $log) {
   // map variable will help to load map
   $scope.markers = [];
-  $scope.bounds = {};
   $scope.map = {
-    show: true,
     control: {},
     center: {
       latitude: 12.95,
       longitude: 77.777
     },
-    zoom: 14
+    zoom: 14,
+    bounds: {}
   };
   $scope.options = {
     scrollwheel: true
   };
 
-  $scope.loadCurrentLocation = function() {
+  var loadCurrentLocation = function() {
     uiGmapGoogleMapApi.then(function(maps) {
       if (navigator.geolocation) {
         navigator.geolocation.getCurrentPosition(changeMap);
@@ -32,17 +31,22 @@ angular.module('lmApp')
         latitude: position.coords.latitude,
         longitude: position.coords.longitude
       },
-      bounds: {}
+      zoom: 14,
+      bounds: {},
+      control: {}
     };
+    $scope.options = {
+      scrollwheel: true
+    }
   };
 
   $scope.findMaxDistance = function () {
     // radius of earth in kms
     var earthRadius = 6373;
-    var neLat = $scope.bounds.northeast.latitude;
-    var neLng = $scope.bounds.northeast.longitude;
-    var swLat = $scope.bounds.southwest.latitude;
-    var swLng = $scope.bounds.southwest.longitude;
+    var neLat = $scope.map.bounds.northeast.latitude;
+    var neLng = $scope.map.bounds.northeast.longitude;
+    var swLat = $scope.map.bounds.southwest.latitude;
+    var swLng = $scope.map.bounds.southwest.longitude;
     var dLng = neLng - swLng;
     var dLat = neLat - swLat;
     var a = Math.pow(Math.sin(dLat/2), 2) + (Math.cos(neLat) * Math.cos(swLat) * Math.pow(Math.sin(dLng/2), 2));
@@ -95,5 +99,5 @@ angular.module('lmApp')
     }
   };
   // Initially show a location where user sessioned from
-  $scope.loadCurrentLocation();
+  loadCurrentLocation();
 });
