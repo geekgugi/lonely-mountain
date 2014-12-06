@@ -4,7 +4,7 @@ angular.module('lmApp')
 .controller('MainCtrl', function($scope, $http, uiGmapGoogleMapApi, $log) {
   // map variable will help to load map
   $scope.markers = [];
-  $scope.bounds;
+  $scope.bounds = {};
   $scope.map = {
     show: true,
     control: {},
@@ -31,7 +31,8 @@ angular.module('lmApp')
       center: {
         latitude: position.coords.latitude,
         longitude: position.coords.longitude
-      }
+      },
+      bounds: {}
     };
   };
 
