@@ -3,22 +3,16 @@
 angular.module('lmApp')
 .controller('MainCtrl', function($scope, $http, uiGmapGoogleMapApi, $log) {
   // map variable will help to load map
+  $scope.markers = [];
+  $scope.bounds;
   $scope.map = {
     show: true,
-    markers: [],
-    options: {
-      streetViewControl: false,
-      panControl: false,
-      maxZoom: 20,
-      minZoom: 3
-    },
     control: {},
     center: {
       latitude: 12.95,
       longitude: 77.777
     },
-    zoom: 14,
-    bounds: {}
+    zoom: 14
   };
   $scope.options = {
     scrollwheel: true
@@ -33,24 +27,21 @@ angular.module('lmApp')
   };
 
   var changeMap = function(position) {
-    debugger;
     $scope.map = {
       center: {
         latitude: position.coords.latitude,
         longitude: position.coords.longitude
-      },
-      zoom: 14,
-      bounds: {}
+      }
     };
   };
 
   $scope.findMaxDistance = function () {
     // radius of earth in kms
     var earthRadius = 6373;
-    var neLat = $scope.map.bounds.northeast.latitude;
-    var neLng = $scope.map.bounds.northeast.longitude;
-    var swLat = $scope.map.bounds.southwest.latitude;
-    var swLng = $scope.map.bounds.southwest.longitude;
+    var neLat = $scope.bounds.northeast.latitude;
+    var neLng = $scope.bounds.northeast.longitude;
+    var swLat = $scope.bounds.southwest.latitude;
+    var swLng = $scope.bounds.southwest.longitude;
     var dLng = neLng - swLng;
     var dLat = neLat - swLat;
     var a = Math.pow(Math.sin(dLat/2), 2) + (Math.cos(neLat) * Math.cos(swLat) * Math.pow(Math.sin(dLng/2), 2));
@@ -73,7 +64,7 @@ angular.module('lmApp')
     // have a promise from $http
     var promise = $http.get(url);
     promise.then(function (response) {
-      $scope.map.markers = response.data;
+      $scope.markers = response.data;
     }, function(error) {
       $log.error("places api returned error");
     });
