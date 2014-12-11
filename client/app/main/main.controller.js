@@ -24,8 +24,6 @@ angular.module('lmApp')
         scrollwheel: true
       };
 
-      //Initialise bootstap material theme on elements
-      $.material.init();
     })();
 
     var loadCurrentLocation = function() {
@@ -85,10 +83,17 @@ angular.module('lmApp')
         // have a promise from $http
       var promise = $http.post(url, data);
       promise.then(function(response) {
-        $scope.markers = response.data;
-      }, function(error) {
-        $log.error("places api returned error");
-      });
+          $scope.markers = response.data;
+          //Move map to the place
+          $scope.map.center = {
+            latitude: selectedLatitude,
+            longitude: selectedLongitude
+          };
+        },
+
+        function(error) {
+          $log.error("places api returned error");
+        });
     };
 
     var changePlaceCB = function(searchBox) {
@@ -128,7 +133,12 @@ angular.module('lmApp')
         $scope.findPlaces();
       },
       reset: function() {
-        $scope.findPlaces();
+        $scope.filter.gender.male = true;
+        $scope.filter.gender.female = true;
+        $scope.filter.price = {
+          to: 10000,
+          from: 1000
+        }
       }
     };
   });

@@ -14,21 +14,19 @@
 .footer a {
   color: #1970c8
 }
-input.search{
-z-index: 0;
-position: absolute;
-right: 99px;
-top: 0px;
-background: #FFF;
-padding: 10px;
-margin: 2px;
-border: #CCC;
-height: 35px !important;
-border-radius: 5px;
-width:275px;
-
+input.search {
+  z-index: 0;
+  position: absolute;
+  right: 99px;
+  top: 0px;
+  background: #FFF;
+  padding: 10px;
+  margin: 2px;
+  border: #CCC;
+  height: 35px !important;
+  border-radius: 5px;
+  width: 275px;
 }
-
 /** Custom **/
 
 .map {
@@ -36,10 +34,10 @@ width:275px;
   width: 100%;
   height: 92%;
 }
-
 /* TODO: Move this navbar related css to navbar.css
  * file
  * */
+
 .logo-holder {
   width: 490px;
   margin: 0 auto;
@@ -68,48 +66,42 @@ html, body {
 /*          Filter Tab          */
 /*------------------------------*/
 
-.filter-tab{
-  height: 90%;
+.filter-tab {
+  height: 100%;
   background-color: #f8f8f8;
   border: #E5E5E5;
   position: absolute;
-  top: 76px;
-  margin:-15px -15px -15px 0px;
-  padding:0px;
-
+  top: 16px;
+  margin: -15px -15px -15px 0px;
+  padding: 0px;
 }
-.filter-tab .panel-body{
-  padding:8px;
-  max-height:84%;
-  overflow-x:hidden;
+.filter-tab .panel-body {
+  padding: 8px;
+  max-height: 84%;
+  overflow-x: hidden;
   overflow-y: auto;
 }
-.filter-tab footer{
-position: absolute;
-bottom: 0px;
-width: 95%;
+.filter-tab footer {
+  position: absolute;
+  bottom: 20px;
+  width: 95%;
 }
-.price-slider-to{
+.price-slider-to {
   margin-left: -14px;
-margin-top: 5px;
+  margin-top: 5px;
 }
-.price-slider-from{
- margin-top: 5px; 
+.price-slider-from {
+  margin-top: 5px;
 }
-.price-slider{
-
-}
-
+.price-slider {}
 /*--------------------------------------*/
 /*        Bootstrap changes             */
 /*--------------------------------------*/
 
 .navbar-nav.navbar-right:last-child {
-margin-right: 0px;
+  margin-right: 0px;
 }
-.navbar{
-
--webkit-box-shadow: 0 1px 1px rgba(0, 0, 0, 0.05);
-box-shadow: 0 0px 5px #000;
-
+.navbar {
+  -webkit-box-shadow: 0 1px 1px rgba(0, 0, 0, 0.05);
+  box-shadow: 0 0px 5px #000;
 }

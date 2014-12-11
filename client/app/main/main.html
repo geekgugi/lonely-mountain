@@ -5,12 +5,12 @@
             <ui-gmap-markers models="markers" coords="'self'" icon="'icon'"> </ui-gmap-markers>
             <ui-gmap-search-box template="searchbox.template" events="searchbox.events" position="searchbox.position"></ui-gmap-search-box>
         </ui-gmap-google-map>
-        <div class="col-xs-11 col-sm-11 col-md-3 filter-tab panel panel-default">
+        <div class="col-xs-11 col-sm-11 col-md-3 filter-tab panel panel-primary">
             <div class="panel-heading">
                 <h3 class="panel-title">Refine Results</h3>
             </div>
             <div class="panel-body">
-                <div class="panel panel-primary">
+                <div class="panel panel-default">
                     <div class="panel-heading">
                         <h3 class="panel-title">Gender</h3>
                     </div>
@@ -27,7 +27,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="panel panel-primary">
+                <div class="panel panel-default">
                     <div class="panel-heading">
                         <h3 class="panel-title">Price</h3>
                     </div>
@@ -36,7 +36,7 @@
                             <div class="col-md-2 col-xs-2">
                                 <div class='price-slider-from'>{{filter.price.from}}</div>
                             </div>
-                            <div class="col-md-8 col-xs-8" slider ng-from="filter.price.from" ng-to="filter.price.to" start='1000' end='10000' step='500' callback='slide'></div>
+                            <div class="col-md-8 col-xs-8" slider ng-from="filter.price.from" ng-to="filter.price.to" start=1000 end=10000 step=100></div>
                             <div class="col-md-2 col-xs-2">
                                 <div class='price-slider-to'>{{filter.price.to}}</div>
                             </div>

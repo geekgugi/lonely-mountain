@@ -8,7 +8,8 @@ angular.module('lmApp', [
     'btford.socket-io',
     'ui.bootstrap',
     'uiGmapgoogle-maps',
-    'ngDialog'
+    'ngDialog',
+    'nouislider'
 
   ])
   .config(function($routeProvider, $locationProvider, $httpProvider,
