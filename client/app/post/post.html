@@ -1,0 +1,27 @@
+<script type="text/ng-template" id="postDetails">
+    <h1>Add an Address</h1>
+
+<form ng-controller="PostCtrl" ng-submit="addPost()">
+    <input ng-model="place.number" type="text" placeholder="House #"/>
+    <input ng-model="place.street" type="text" value="place.street" placeholder="Street"/>
+    <input ng-model="place.addressLine1" value="place.addressLine1" type="text" placeholder="Address Line 1"/>
+    <input ng-model="place.addressLine2" value="place.addressLine2" type="text" placeholder="Address Line 2"/>
+    <input type="submit" value="Save Post"/>
+</form>
+</script>
+
+<div ng-include="'components/navbar/navbar.html'"></div>
+<div class="map">
+  <ui-gmap-google-map pan="true" bounds="map.bounds" center="map.center" zoom="map.zoom" draggable="true" events="map.events" options="options">
+  <ui-gmap-marker coords="map.clickedMarker" idKey="map.clickedMarker.id" options="map.clickedMarker.options"></ui-gmap-marker>
+  <ui-gmap-search-box template="searchbox.template" events="searchbox.events" position="searchbox.position"></ui-gmap-search-box>
+  </ui-gmap-google-map>
+</div>
+<footer class="footer">
+  <div class="container">
+    <p>Dwellshare Inc |
+    <a href="https://twitter.com/dwellshare">@dwellshare</a> |
+    <a href="https://github.com/geekgugi/lonely-mountain/issues?state=open">Issues</a>
+    </p>
+  </div>
+</footer>

@@ -7,14 +7,27 @@ angular.module('lmApp', [
   'ngRoute',
   'btford.socket-io',
   'ui.bootstrap',
-  'uiGmapgoogle-maps'
+  'uiGmapgoogle-maps',
+  'ngDialog'
 ])
-  .config(function ($routeProvider, $locationProvider, $httpProvider, uiGmapGoogleMapApiProvider) {
+  .config(function ($routeProvider, $locationProvider, $httpProvider, 
+                    uiGmapGoogleMapApiProvider, ngDialogProvider) {
+
     uiGmapGoogleMapApiProvider.configure({
       key:'AIzaSyCT7hEAbw7JWU-Krir6cOCngFDrrhZg-Eo',
       v: '3.17',
       libraries: 'places,geometry'
     });
+    // for  ngDialog throught the app
+    ngDialogProvider.setDefaults({
+      className: 'ngdialog-theme-default',
+      plain: false,
+      showClose: true,
+      closeByDocument: true,
+      closeByEscape: true,
+      appendTo: false
+    });
+    
     $routeProvider
       .otherwise({
         redirectTo: '/'

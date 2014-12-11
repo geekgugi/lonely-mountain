@@ -54,9 +54,6 @@ input.search{
 html, body {
   height: 100%;
 }
-.full-container {
-  height: 92%;
-}
 .angular-google-map-container, .angular-google-map {
   height: 100%;
 }
