@@ -23,13 +23,8 @@ module.exports = function (config) {
       'client/bower_components/angular-socket-io/socket.js',
       'client/bower_components/angular-google-maps/dist/angular-google-maps.js',
       'client/app/app.js',
-      'client/app/app.coffee',
       'client/app/**/*.js',
-      'client/app/**/*.coffee',
       'client/components/**/*.js',
-      'client/components/**/*.coffee',
-      'client/app/**/*.jade',
-      'client/components/**/*.jade',
       'client/app/**/*.html',
       'client/components/**/*.html'
     ],
@@ -52,11 +47,11 @@ module.exports = function (config) {
     exclude: [],
 
     // web server port
-    port: 8080,
+    port: 8081,
 
     // level of logging
     // possible values: LOG_DISABLE || LOG_ERROR || LOG_WARN || LOG_INFO || LOG_DEBUG
-    logLevel: config.LOG_INFO,
+    logLevel: config.LOG_DEBUG,
 
 
     // enable / disable watching file and executing tests whenever any file changes
@@ -71,7 +66,7 @@ module.exports = function (config) {
     // - Safari (only Mac)
     // - PhantomJS
     // - IE (only Windows)
-    browsers: ['Firefox'],// ['PhantomJS'],
+    browsers: ['Chrome'],// ['PhantomJS'],
 
 
     // Continuous Integration mode
