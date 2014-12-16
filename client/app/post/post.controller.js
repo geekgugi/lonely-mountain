@@ -1,7 +1,11 @@
 'use strict';
 
 angular.module('lmApp')
-.controller('PostCtrl', function($scope, $http, $log, ngDialog, uiGmapGoogleMapApi) {
+.controller('PostCtrl', Controller);
+
+Controller.$inject = ['$scope', '$http', '$log', 'ngDialog', 'uiGmapGoogleMapApi', '$rootScope'];
+
+function Controller ($scope, $http, $log, ngDialog, uiGmapGoogleMapApi, $rootScope) {
   $scope.place = {};
 
   uiGmapGoogleMapApi.then(function(maps) {
@@ -28,27 +32,16 @@ angular.module('lmApp')
       events: {
         click: function (mapModel, eventName, originalEventArgs) {
           // 'this' is the directive's scope
-          var e = originalEventArgs[0],
-          lat = e.latLng.lat(),
-          lon = e.latLng.lng();
+          var e = originalEventArgs[0];
+          $rootScope.latitude = e.latLng.lat();
+          $rootScope.longitude = e.latLng.lng();
           // Call the ngDialog from here show address 
           // only house number should be filled in by user
-          ngDialog.open({
+          $rootScope.dialogBox = ngDialog.open({
             template: 'postDetails',
             scope: $scope
           });
-          $scope.$apply( function () {
-            $scope.map.clickedMarker = {
-              id: 0,
-              options: {
-                labelContent: 'You clicked here ' + 'lat: ' + lat + ' lon: ' + lon,
-                labelClass: "marker-labels",
-                labelAnchor:"50 0"
-              },
-              latitude: lat,
-              longitude: lon
-            };
-          });
+          $rootScope.$apply();
         }
       }
     }
@@ -56,6 +49,7 @@ angular.module('lmApp')
 
 
   $scope.addPost = function () {
+
     $http.post('/api/rooms', {
       houseId: $scope.place.number,
       availability: false,
@@ -63,13 +57,13 @@ angular.module('lmApp')
       area: $scope.place.addressLine2,
       geolocation: {
         type: "Point",
-        coordinates: [12,13] 
+        coordinates: [$rootScope.latitude,$rootScope.longitude] 
       }
-    }).
-      success(function (data) {
+    }).success(function (data) {
+      $rootScope.dialogBox.close();
       $log.log("Success");
-    }).
-      error(function () {
+    }).error(function () {
+      $rootScope.dialogBox.close();
       $log.log("Failure");
     });
   }
@@ -96,5 +90,4 @@ angular.module('lmApp')
       places_changed: changePlaceCB
     }
   };
-
-});
+};
